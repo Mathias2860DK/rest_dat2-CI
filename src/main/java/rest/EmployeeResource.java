@@ -82,7 +82,7 @@ public class EmployeeResource {
         //System.out.println("--------------->"+count);
         return new Gson().toJson(employeeDTOS);  //Done manually so no need for a DTO
     }
-
+//http://localhost:8080/rest_day2_war_exploded/api/employee/name/testName
     @Path("/name/{name}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
