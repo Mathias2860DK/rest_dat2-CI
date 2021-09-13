@@ -20,6 +20,7 @@ public class Populator {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EmployeeFacade employeeFacade = EmployeeFacade.getEmployeeFacade(emf);
         employeeFacade.create(new Employee("testName","testAdress",999));
+        employeeFacade.create(new Employee("testName","testAdress123",999));
         employeeFacade.create(new Employee("testName2","testAdress2",999));
         employeeFacade.create(new Employee("testName3","testAdress3",999));
 

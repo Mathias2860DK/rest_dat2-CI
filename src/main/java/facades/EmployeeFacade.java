@@ -6,6 +6,7 @@ import entities.RenameMe;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import utils.EMF_Creator;
 
@@ -55,6 +56,13 @@ public class EmployeeFacade {
         EntityManager em = emf.createEntityManager();
         return em.find(Employee.class,id);
     }
+
+    public List<Employee> getEmployeesByName(String name){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Employee> query = (TypedQuery<Employee>) em.createQuery("SELECT e FROM Employee e WHERE e.name = :name");
+        query.setParameter("name",name);
+        return query.getResultList();
+    }
     
     //TODO Remove/Change this before use
     public long getRenameMeCount(){
@@ -65,6 +73,12 @@ public class EmployeeFacade {
         }finally{  
             em.close();
         }
+    }
+
+    public List<Employee> getEmployeesWithHighestSalary(){
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(e2.salary) FROM Employee e2)");
+        return query.getResultList();
     }
     
     public List<Employee> getAll(){
@@ -81,10 +95,16 @@ public class EmployeeFacade {
         EmployeeFacade fe = getEmployeeFacade(emf);
         System.out.println("#### getEmployeeById ####");
         System.out.println(fe.getEmployeeById(1));
-        System.out.println("####  ####");
-        System.out.println("####  ####");
-        System.out.println("####  ####");
+        System.out.println("#### getEmployeesByName ####");
+        System.out.println(fe.getEmployeesByName("testName"));//Gets all Employees with the specifed name
+        System.out.println("#### getAllEmployees ####");
         fe.getAll().forEach(dto->System.out.println(dto));
+        System.out.println("#### getEmployeesWithHighestSalary ####");
+        System.out.println(fe.getEmployeesWithHighestSalary());
+        System.out.println("#### createEmployee ####");
+        Employee employee = fe.create(new Employee("madeInEmpFacade","emdfacade",22));
+        System.out.println(employee);
+
     }
 
 }
