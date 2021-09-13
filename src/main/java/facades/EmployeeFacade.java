@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.RenameMeDTO;
+import entities.Employee;
 import entities.RenameMe;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -38,21 +39,21 @@ public class EmployeeFacade {
         return emf.createEntityManager();
     }
     
-    public RenameMeDTO create(RenameMeDTO rm){
-        RenameMe rme = new RenameMe(rm.getDummyStr1(), rm.getDummyStr2());
+    public Employee create(Employee employee){
+        //Employee employee = new Employee("testName","testAdress",999);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(rme);
+            em.persist(employee);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return new RenameMeDTO(rme);
+        return employee;
     }
-    public RenameMeDTO getById(long id){
+    public Employee getEmployeeById(Integer id){
         EntityManager em = emf.createEntityManager();
-        return new RenameMeDTO(em.find(RenameMe.class, id));
+        return em.find(Employee.class,id);
     }
     
     //TODO Remove/Change this before use
@@ -66,16 +67,23 @@ public class EmployeeFacade {
         }
     }
     
-    public List<RenameMeDTO> getAll(){
+    public List<Employee> getAll(){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<RenameMe> query = em.createQuery("SELECT r FROM RenameMe r", RenameMe.class);
-        List<RenameMe> rms = query.getResultList();
-        return RenameMeDTO.getDtos(rms);
+        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+        List<Employee> employees = query.getResultList();
+        return employees;
     }
     
     public static void main(String[] args) {
+        Populator.populate(); //Data to test the methods.
+
         emf = EMF_Creator.createEntityManagerFactory();
         EmployeeFacade fe = getEmployeeFacade(emf);
+        System.out.println("#### getEmployeeById ####");
+        System.out.println(fe.getEmployeeById(1));
+        System.out.println("####  ####");
+        System.out.println("####  ####");
+        System.out.println("####  ####");
         fe.getAll().forEach(dto->System.out.println(dto));
     }
 
