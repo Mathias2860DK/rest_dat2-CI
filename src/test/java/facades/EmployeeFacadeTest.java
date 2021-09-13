@@ -1,5 +1,6 @@
 package facades;
 
+import entities.Employee;
 import utils.EMF_Creator;
 import entities.RenameMe;
 import javax.persistence.EntityManager;
@@ -13,18 +14,18 @@ import org.junit.jupiter.api.Test;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class FacadeExampleTest {
+public class EmployeeFacadeTest {
 
- /*   private static EntityManagerFactory emf;
-    private static FacadeExample facade;
+    private static EntityManagerFactory emf;
+    private static EmployeeFacade facade;
 
-    public FacadeExampleTest() {
+    public EmployeeFacadeTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
-       facade = FacadeExample.getFacadeExample(emf);
+       facade = EmployeeFacade.getEmployeeFacade(emf);
     }
 
     @AfterAll
@@ -39,9 +40,9 @@ public class FacadeExampleTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new RenameMe("Some txt", "More text"));
-            em.persist(new RenameMe("aaa", "bbb"));
+            em.createNamedQuery("Employee.deleteAllRows").executeUpdate();
+            em.persist(new Employee("Mathias","Ourøgade",10000));
+            em.persist(new Employee("Ellen", "Ourøgade",100));
 
             em.getTransaction().commit();
         } finally {
@@ -54,11 +55,31 @@ public class FacadeExampleTest {
 //        Remove any data after each test was run
     }
 
-    // TODO: Delete or change this method 
     @Test
-    public void testAFacadeMethod() throws Exception {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+    void getEmployeeFacadeTest() {
     }
-    */
+
+    @Test
+    void createTest() {
+        EntityManager em = emf.createEntityManager();
+        Employee employee = facade.create(new Employee("Jens","Aarhusgade",300));
+        assertEquals("Jens",employee.getName());
+    }
+
+    @Test
+    void getEmployeeById() {
+    }
+
+    @Test
+    void getEmployeesByName() {
+    }
+
+    @Test
+    void getEmployeesWithHighestSalary() {
+    }
+
+    @Test
+    void getAll() {
+    }
 
 }

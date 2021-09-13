@@ -1,9 +1,12 @@
 package entities;
 
+
+
 import javax.persistence.*;
 
 @Table(name = "employee")
 @Entity
+@NamedQuery(name = "Employee.deleteAllRows", query = "DELETE from Employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
