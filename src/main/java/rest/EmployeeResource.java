@@ -35,9 +35,9 @@ public class EmployeeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
        
-        long count = FACADE.getRenameMeCount();
+
         //System.out.println("--------------->"+count);
-        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+        return "10";  //Done manually so no need for a DTO
     }
 
     @Path("all")
