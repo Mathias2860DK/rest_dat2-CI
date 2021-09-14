@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import utils.EMF_Creator;
 
 /**
- *
+ *TEST
  * Rename Class to a relevant name Add add relevant facade methods
  */
 public class EmployeeFacade {
