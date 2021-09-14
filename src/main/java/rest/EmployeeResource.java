@@ -20,10 +20,10 @@ import java.util.List;
 @Path("employee")
 public class EmployeeResource {
 
-    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+    private EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
        
-    private static final EmployeeFacade FACADE =  EmployeeFacade.getEmployeeFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private EmployeeFacade FACADE =  EmployeeFacade.getEmployeeFacade(EMF);
+    private Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
     @GET
     @Produces({MediaType.APPLICATION_JSON})
