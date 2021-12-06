@@ -23,7 +23,7 @@ public class EmployeeResource {
     private EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
        
     private EmployeeFacade FACADE =  EmployeeFacade.getEmployeeFacade(EMF);
-    private Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
             
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -45,6 +45,7 @@ public class EmployeeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllEmployees() {
         Populator.populate();
+        Gson GSON = new GsonBuilder().setPrettyPrinting().create();
         List<Employee> employees = FACADE.getAll();
         List<EmployeeDTO> employeeDTOS = new ArrayList<>();
         for (Employee employee: employees) {
@@ -53,7 +54,7 @@ public class EmployeeResource {
         }
 
         //System.out.println("--------------->"+count);
-        return new Gson().toJson(employeeDTOS);  //Done manually so no need for a DTO
+        return GSON.toJson(employeeDTOS);  //Done manually so no need for a DTO
     }
 
     @Path("id={id}")
