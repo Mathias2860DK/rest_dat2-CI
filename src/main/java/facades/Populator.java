@@ -23,6 +23,7 @@ public class Populator {
         employeeFacade.create(new Employee("testName2","testAdress2",999));
         employeeFacade.create(new Employee("testName3","testAdress3",999));
 //test
+        //test 2
         
     }
     
